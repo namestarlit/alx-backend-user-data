@@ -11,6 +11,10 @@ from api.v1.auth.auth import Auth
 class BasicAuth(Auth):
     """BasicAuth class implementantion"""
 
+    def __init__(self):
+        """Instantiates object attributes"""
+        pass
+
     def extract_base64_authorization_header(
         self, authorization_header: str
     ) -> str:
@@ -78,4 +82,30 @@ class BasicAuth(Auth):
             if user.is_valid_password(user_pwd):
                 return user
 
+        return None
+
+    def current_user(self, request=None) -> TypeVar("User"):
+        """Gets the current user"""
+        auth_header = self.authorization_header(request)
+        b64_auth_header = self.extract_base64_authorization_header(auth_header)
+        decoded_auth_header = self.decode_base64_authorization_header(
+            b64_auth_header
+        )
+
+        user_credentials = self.extract_user_credentials(decoded_auth_header)
+        user = self.user_object_from_credentials(
+            user_credentials[0], user_credentials[1]
+        )
+        return user
+
+    def session_cookie(self, request=None):
+        """Session cookie"""
+        return None
+
+    def create_session(self, user_id: str = None) -> str:
+        """create session"""
+        return None
+
+    def destroy_session(self, request=None):
+        """destroy session"""
         return None
