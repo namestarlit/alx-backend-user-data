@@ -11,10 +11,6 @@ from api.v1.auth.auth import Auth
 class BasicAuth(Auth):
     """BasicAuth class implementantion"""
 
-    def __init__(self):
-        """Instantiates object attributes"""
-        pass
-
     def extract_base64_authorization_header(
         self, authorization_header: str
     ) -> str:
@@ -97,15 +93,3 @@ class BasicAuth(Auth):
             user_credentials[0], user_credentials[1]
         )
         return user
-
-    def session_cookie(self, request=None):
-        """Session cookie"""
-        return None
-
-    def create_session(self, user_id: str = None) -> str:
-        """create session"""
-        return None
-
-    def destroy_session(self, request=None):
-        """destroy session"""
-        return None
