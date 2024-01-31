@@ -25,7 +25,7 @@ class SessionExpAuth(SessionAuth):
 
     def user_id_for_session_id(self, session_id=None):
         """Retrives user_id for session ID"""
-        if session_id is None or created_at not in self.user_id_by_session_id:
+        if session_id is None or "created_at" not in self.user_id_by_session_id:
             return None
 
         session_dict = self.user_id_by_session_id[session_id]
